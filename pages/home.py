@@ -13,6 +13,7 @@ st.title("Credit Card Statement Analyser")
 files = st.file_uploader("Please insert your statment here", "pdf", accept_multiple_files=True)
 trans_list = st.session_state["trans_list"]
 seen_files = st.session_state["seen_files"] # tracks if a file has already been uploaded
+st.header("Wait till file have been processed to move to next page")
 for file in files:
     if file.name not in seen_files:
         seen_files.append(file.name)
@@ -21,7 +22,6 @@ for file in files:
         trans_list.extend(transactions)
     else:
         st.warning(f"{file.name} has already been uploaded")
-        
         
 
 if trans_list: 
