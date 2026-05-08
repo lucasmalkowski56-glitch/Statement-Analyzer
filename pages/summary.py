@@ -46,7 +46,9 @@ for _, row in by_month.iterrows():
     trans_idx = month_df["Amount"].idxmax() 
     purchase = month_df.loc[trans_idx, "Amount"]
 
-    
+    #summed categories 
+    sum_categories = month_df.groupby("Category")["Amount"].sum()
+    top_category = sum_categories.idxmax()
 
     # col a is to indicate if it was the most expensive month or jus the month name
     # col b is to indicate the total of all transactions that month
@@ -54,8 +56,9 @@ for _, row in by_month.iterrows():
     # col d is to indicate the number of transactions that month
     # each column should have a delta indicating the difference from the top version
     st.header(row["Month Year"])
-    a, b, c, d = st.columns(4)
+    a, b, c, d, e = st.columns(5)
     a.metric("Rank", row["Rank"])
+    
     if top_month_name == row["Month"]:
         b.metric("Total Purchased", value=f"${top_month_amount}", delta=0, delta_color="off")
         c.metric("Top Purchase", value=f"${purchase}", delta=round(purchase-top_trans, 2))
@@ -64,5 +67,7 @@ for _, row in by_month.iterrows():
         b.metric("Total Purchased", value=f"${row['Amount']:,.2f}", delta=round(row["Amount"] - top_month_amount, 2))
         c.metric("Top Purchase", value=f"${purchase}", delta=round(purchase - top_trans, 2))
         d.metric("Number of Purchases", row["Purchases"], delta=round(row["Purchases"] - top_purchases, 2))
+    e.metric("Top Category", top_category[:15] + "...", help=top_category)
+    e.caption(top_category)
 
 st.metric("Average Monthly Spending", value=f"${avg_monthly:,.2f}")
