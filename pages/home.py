@@ -22,6 +22,8 @@ Currently working statments:
 
 > **Tip:** The more statements you upload, the more accurate the predictions will be!
 """)
+
+# Upload the files
 files = st.file_uploader("Please insert your statment here", "pdf", accept_multiple_files=True)
 trans_list = st.session_state["trans_list"]
 seen_files = st.session_state["seen_files"] # tracks if a file has already been uploaded
@@ -37,7 +39,7 @@ for file in files:
         
 
 if trans_list: 
-    df = save_csv(trans_list, "output/transactions.csv")
+    df = save_csv(trans_list, None)
     st.session_state["df"] = df
     st.success("Statements processed! Head to the Charts page.")
 
