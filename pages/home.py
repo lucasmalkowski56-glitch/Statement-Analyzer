@@ -10,10 +10,22 @@ if "seen_files" not in st.session_state:
     st.session_state["seen_files"] = []
 
 st.title("Credit Card Statement Analyser")
+st.markdown("""
+Welcome to the **Credit Card Statement Analyser**! Upload your PDF statements to get started.
+Currently working statments: 
+- CIBC Costco Mastercard
+
+**Pages:**
+- 📊 **Charts** — Visual breakdown of your spending by month and category
+- 📋 **Summary** — Monthly spending summary with rankings and insights
+- 🔮 **Predictions** — AI-powered prediction of next month's spending with budget recommendations
+
+> **Tip:** The more statements you upload, the more accurate the predictions will be!
+""")
 files = st.file_uploader("Please insert your statment here", "pdf", accept_multiple_files=True)
 trans_list = st.session_state["trans_list"]
 seen_files = st.session_state["seen_files"] # tracks if a file has already been uploaded
-st.header("Wait till file have been processed to move to next page")
+st.subheader("Please wait till file have been processed to move to next page.")
 for file in files:
     if file.name not in seen_files:
         seen_files.append(file.name)

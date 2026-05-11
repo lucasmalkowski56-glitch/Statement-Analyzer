@@ -20,6 +20,8 @@ by_category = st.session_state["by_category"]
 
 df = st.session_state["df"]
 
+st.title("Chart Visualisations")
+
 st.dataframe(df)
 
 # BAR CHART BY MONTH 

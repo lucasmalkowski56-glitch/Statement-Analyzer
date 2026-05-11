@@ -18,6 +18,7 @@ df = st.session_state["df"]
 by_month = st.session_state["by_month"]
 by_category = st.session_state["by_category"]
 
+st.title("Statement Summary")
 # Summary table
 top_month_idx = by_month["Amount"].idxmax()
 top_month_name = by_month.loc[top_month_idx, "Month"]

@@ -81,8 +81,12 @@ def save_csv(transactions, output_path):
     #make a new column for the months of the transaction date and extract the month from the "Trans Date"
     df["Month"] = df["Trans Date"].str.split().str[0]
     df = df[["Year", "Month", "Trans Date", "Post Date","Amount", "Description", "Category"]]
-    df.to_csv(output_path, index=False)
-    print(f"Saved {len(df)} transactions to {output_path}")
+    if output_path:
+            try:
+                    df.to_csv(output_path, index=False)
+                    print(f"Saved {len(df)} transactions to {output_path}")
+            except OSError:
+                print("Could not save CSV - skipping file save")
     return df
 
 def print_summary(df):
