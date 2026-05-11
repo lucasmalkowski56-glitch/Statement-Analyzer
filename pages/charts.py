@@ -38,7 +38,8 @@ for _, row in by_month.iterrows():
             size=12,
             color="#000000"
         ),
-        yshift=5,
+        yshift=10,
+        yanchor="bottom",
         showarrow=False
     )
 st.plotly_chart(fig)

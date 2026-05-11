@@ -6,7 +6,8 @@ import plotly.express as px
 pg = st.navigation([
     st.Page("pages/home.py", title="Home"), 
     st.Page("pages/charts.py", title="Charts"), 
-    st.Page("pages/summary.py",title="Summary")
+    st.Page("pages/summary.py",title="Summary"),
+    st.Page("pages/predictions.py", title="Next Month's Predictions")
     ])
 pg.run()
 

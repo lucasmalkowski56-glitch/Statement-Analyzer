@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
 from main import extract_transactions, save_csv
-import plotly.express as px
 
 
+#get df from session state
 if "df" not in st.session_state:
     st.warning("Please upload statements on the Home page first.")
     st.stop()
@@ -60,11 +60,11 @@ for _, row in by_month.iterrows():
     a.metric("Rank", row["Rank"])
     
     if top_month_name == row["Month"]:
-        b.metric("Total Purchased", value=f"${top_month_amount}", delta=0, delta_color="off")
+        b.metric("Total Purchased", value=f"${top_month_amount}", delta=0, delta_color="off", help=f"${top_month_amount}")
         c.metric("Top Purchase", value=f"${purchase}", delta=round(purchase-top_trans, 2))
         d.metric("Number of Purchases", row["Purchases"], delta= round(row["Purchases"] - top_purchases, 2))
     else: 
-        b.metric("Total Purchased", value=f"${row['Amount']:,.2f}", delta=round(row["Amount"] - top_month_amount, 2))
+        b.metric("Total Purchased", value=f"${row['Amount']:,.2f}", delta=round(row["Amount"] - top_month_amount, 2), help=f"${row['Amount']:,.2f}")
         c.metric("Top Purchase", value=f"${purchase}", delta=round(purchase - top_trans, 2))
         d.metric("Number of Purchases", row["Purchases"], delta=round(row["Purchases"] - top_purchases, 2))
     e.metric("Top Category", top_category[:15] + "...", help=top_category)
